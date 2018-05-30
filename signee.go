@@ -126,7 +126,7 @@ func (s *signee) githubPublicKey() ([]byte, error) {
 		if key.KeyID == s.key {
 			verified := false
 			for _, email := range key.Emails {
-				if email.Verified == true {
+				if email.Verified {
 					verified = true
 					break
 				}

@@ -23,6 +23,7 @@ func TestNewRelease(t *testing.T) {
 
 	loader := release.NewFileSystemLoader(dir)
 	sig, mani, arts, err := loader.Load()
+	assert.Nil(t, err)
 	assert.Equal(t, signature, sig)
 	assert.Equal(t, manifest, mani)
 	//FIXME: improve this shit

@@ -42,6 +42,7 @@ func TestNew(t *testing.T) {
 	m, err = manifest.Serialise()
 	assert.Nil(t, err)
 	_, err = io.Copy(&buf2, m)
+	assert.Nil(t, err)
 
 	identities, err := releaser.VerifySignature(mock.ValidSignee(), buf2.Bytes(), signature)
 	assert.Nil(t, err)

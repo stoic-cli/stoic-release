@@ -61,6 +61,9 @@ func (fs *fileSystemLoader) Load() ([]byte, Manifester, []Artifact, error) {
 	}
 
 	manifestFile, err := fileFromGlob(absPath, "*.manifest")
+	if err != nil {
+		return nil, nil, nil, err
+	}
 	manifester, err := NewManifestLoader().Read(manifestFile)
 	if err != nil {
 		return nil, nil, nil, errors.Wrap(err, "failed to load manifest")
@@ -68,6 +71,9 @@ func (fs *fileSystemLoader) Load() ([]byte, Manifester, []Artifact, error) {
 
 	var signature bytes.Buffer
 	manifestSigFile, err := fileFromGlob(absPath, "*.manifest.asc")
+	if err != nil {
+		return nil, nil, nil, err
+	}
 	_, err = io.Copy(&signature, manifestSigFile)
 	if err != nil {
 		return nil, nil, nil, errors.Wrap(err, "failed to load manifest signature")
@@ -110,6 +116,9 @@ func (fs *fileSystemLoader) Load() ([]byte, Manifester, []Artifact, error) {
 
 func fileFromGlob(basePath, pattern string) (*os.File, error) {
 	matches, err := filepath.Glob(path.Join(basePath, pattern))
+	if err != nil {
+		return nil, errors.Wrap(err, "failed to glob filesystem")
+	}
 	if len(matches) > 1 {
 		return nil, fmt.Errorf("found too many matches for: %s, expected: %d, got: %d", pattern, 1, len(matches))
 	}
