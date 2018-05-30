@@ -1,8 +1,8 @@
 package release
 
 import (
-	"github.com/stoic-cli/stoic-release/pgp"
 	"github.com/pkg/errors"
+	"github.com/stoic-cli/stoic-release/pgp"
 	"golang.org/x/crypto/openpgp/packet"
 )
 
@@ -16,7 +16,7 @@ type signer struct {
 	config *packet.Config
 }
 
-//FIXME: Don't like this, required?
+// NewSigner creates a new stand-alone signer
 func NewSigner(config *packet.Config) Signer {
 	return &signer{
 		config: config,

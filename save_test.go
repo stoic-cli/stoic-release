@@ -1,11 +1,12 @@
 package release_test
 
 import (
-	"testing"
-	"github.com/stoic-cli/stoic-release"
 	"io/ioutil"
-	"github.com/stretchr/testify/assert"
+	"testing"
+
+	"github.com/stoic-cli/stoic-release"
 	"github.com/stoic-cli/stoic-release/mock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewRelease(t *testing.T) {

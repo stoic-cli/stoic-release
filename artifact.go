@@ -3,9 +3,10 @@ package release
 import (
 	"bytes"
 	"fmt"
-	"github.com/pkg/errors"
 	"io"
 	"strings"
+
+	"github.com/pkg/errors"
 )
 
 // Artifact provides the interface for
@@ -22,6 +23,7 @@ type Artifact interface {
 // types
 type ArtifactType string
 
+// nolint
 const (
 	ArtifactTypeReleaseNotes = "relnotes"
 	ArtifactTypeChangeSet    = "changeset"
@@ -67,12 +69,14 @@ func newArtifact(content io.ReadCloser, name string, artifactType ArtifactType, 
 	}, nil
 }
 
+// NewArtifact creates a new artifact
 func NewArtifact(content io.ReadCloser, projectName string, artifactType ArtifactType) (Artifact, error) {
 	return newArtifact(content, projectName, artifactType, func(version string) string {
 		return fmt.Sprintf("%s_%s.%s", strings.ToLower(projectName), strings.ToLower(version), artifactType)
 	})
 }
 
+// NewBinaryArtifact creates a new binary artifact
 func NewBinaryArtifact(content io.ReadCloser, projectName string, os OperatingSystemType, arch ArchType) (Artifact, error) {
 	return newArtifact(content, projectName, ArtifactTypeBinary, func(version string) string {
 		return fmt.Sprintf("%s_%s-%s.%s.%s", strings.ToLower(projectName), strings.ToLower(version), os, arch, ArtifactTypeBinary)

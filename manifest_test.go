@@ -1,12 +1,13 @@
 package release_test
 
 import (
-	"testing"
-	"github.com/stoic-cli/stoic-release/mock"
-	"github.com/stoic-cli/stoic-release"
-	"github.com/stretchr/testify/assert"
 	"bytes"
 	"io"
+	"testing"
+
+	"github.com/stoic-cli/stoic-release"
+	"github.com/stoic-cli/stoic-release/mock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestManifest(t *testing.T) {

@@ -6,6 +6,7 @@ package release
 // OperatingSystemType enumerates the available operating systems
 type OperatingSystemType string
 
+// nolint
 const (
 	OperatingSystemTypeAndroid   OperatingSystemType = "android"
 	OperatingSystemTypeDarwin    OperatingSystemType = "darwin"
@@ -22,6 +23,7 @@ const (
 // ArchType enumerates the available architectures
 type ArchType string
 
+// nolint
 const (
 	ArchType386      ArchType = "386"   // x86 | x86-32
 	ArchTypeamd64    ArchType = "amd64" // x86-64

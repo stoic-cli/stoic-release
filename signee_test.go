@@ -1,11 +1,12 @@
 package release_test
 
 import (
-	"github.com/stretchr/testify/assert"
-	"testing"
 	"strings"
-	"github.com/stoic-cli/stoic-release/mock"
+	"testing"
+
 	"github.com/stoic-cli/stoic-release"
+	"github.com/stoic-cli/stoic-release/mock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNewSignee(t *testing.T) {
@@ -39,4 +40,3 @@ func TestNewSignee(t *testing.T) {
 		}
 	}
 }
-

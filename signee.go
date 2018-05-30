@@ -1,11 +1,12 @@
 package release
 
 import (
-	"fmt"
-	"time"
-	"net/http"
-	"github.com/pkg/errors"
 	"encoding/json"
+	"fmt"
+	"net/http"
+	"time"
+
+	"github.com/pkg/errors"
 )
 
 // Signee provides the available operations
@@ -27,13 +28,13 @@ type Signee interface {
 	Type() SigneeType
 }
 
-// DefaultGithubEndpoint can be overridden if a different access
+// DefaultGithubAPIEndpoint can be overridden if a different access
 // point is required
 var DefaultGithubAPIEndpoint = "https://api.github.com"
 
 // DefaultKeybaseEndpoint can be overridden if a different access
 // point is required
-var DefaulKeybaseEndpoint = "https://keybase.io/"
+var DefaultKeybaseEndpoint = "https://keybase.io/"
 
 // SigneeType enumerates the available
 // default sources for fetching a signee
@@ -77,24 +78,26 @@ func (s *signee) PublicKey() ([]byte, error) {
 	}
 }
 
+// GPGKey unmarshals a github response for gpg keys
 // Proudly stolen from: https://github.com/google/go-github
 // They currently don't support the `RawKey` field.
 type GPGKey struct {
-	ID                int64     `json:"id,omitempty"`
-	PrimaryKeyID      int64     `json:"primary_key_id,omitempty"`
-	KeyID             string    `json:"key_id,omitempty"`
-	PublicKey         string    `json:"public_key,omitempty"`
-	RawKey            string    `json:"raw_key,omitempty"`
+	ID                int64      `json:"id,omitempty"`
+	PrimaryKeyID      int64      `json:"primary_key_id,omitempty"`
+	KeyID             string     `json:"key_id,omitempty"`
+	PublicKey         string     `json:"public_key,omitempty"`
+	RawKey            string     `json:"raw_key,omitempty"`
 	Emails            []GPGEmail `json:"emails,omitempty"`
 	Subkeys           []GPGKey   `json:"subkeys,omitempty"`
-	CanSign           bool      `json:"can_sign,omitempty"`
-	CanEncryptComms   bool      `json:"can_encrypt_comms,omitempty"`
-	CanEncryptStorage bool      `json:"can_encrypt_storage,omitempty"`
-	CanCertify        bool      `json:"can_certify,omitempty"`
-	CreatedAt         time.Time `json:"created_at,omitempty"`
-	ExpiresAt         time.Time `json:"expires_at,omitempty"`
+	CanSign           bool       `json:"can_sign,omitempty"`
+	CanEncryptComms   bool       `json:"can_encrypt_comms,omitempty"`
+	CanEncryptStorage bool       `json:"can_encrypt_storage,omitempty"`
+	CanCertify        bool       `json:"can_certify,omitempty"`
+	CreatedAt         time.Time  `json:"created_at,omitempty"`
+	ExpiresAt         time.Time  `json:"expires_at,omitempty"`
 }
 
+// GPGEmail represents the gpg email section
 type GPGEmail struct {
 	Email    string `json:"email,omitempty"`
 	Verified bool   `json:"verified,omitempty"`
@@ -107,7 +110,7 @@ func (s *signee) githubPublicKey() ([]byte, error) {
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to create gpg keys request")
 	}
-	req.Header.Set("Accept","application/vnd.github.v3+json")
+	req.Header.Set("Accept", "application/vnd.github.v3+json")
 	res, err := client.Do(req)
 	if err != nil {
 		return nil, errors.Wrap(err, "failed to list users gpg keys")
@@ -143,14 +146,17 @@ func (s *signee) keybasePublicKey() ([]byte, error) {
 	return nil, fmt.Errorf("not implemented")
 }
 
+// Key returns the public key
 func (s *signee) Key() string {
 	return s.key
 }
 
+// User returns the user
 func (s *signee) User() string {
 	return s.user
 }
 
+// Type returns the signee type
 func (s *signee) Type() SigneeType {
 	return s.signeeType
 }

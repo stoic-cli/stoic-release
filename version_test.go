@@ -1,10 +1,11 @@
 package release
 
 import (
-	"github.com/stretchr/testify/assert"
-	"gopkg.in/src-d/go-git.v4"
 	"io/ioutil"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
+	"gopkg.in/src-d/go-git.v4"
 )
 
 func TestNewProvidedVersion(t *testing.T) {

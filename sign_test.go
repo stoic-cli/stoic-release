@@ -1,12 +1,13 @@
 package release_test
 
 import (
-	"github.com/stoic-cli/stoic-release"
-	"github.com/stoic-cli/stoic-release/mock"
-	"github.com/stretchr/testify/assert"
 	"testing"
 	"time"
+
+	"github.com/stoic-cli/stoic-release"
+	"github.com/stoic-cli/stoic-release/mock"
 	"github.com/stoic-cli/stoic-release/pgp"
+	"github.com/stretchr/testify/assert"
 )
 
 func testTime() time.Time {

@@ -1,11 +1,12 @@
 package mock
 
 import (
-	"golang.org/x/crypto/openpgp/armor"
 	"bytes"
 	"io"
+
 	"github.com/awnumar/memguard"
 	"golang.org/x/crypto/openpgp"
+	"golang.org/x/crypto/openpgp/armor"
 	"golang.org/x/crypto/openpgp/packet"
 )
 
@@ -51,10 +52,12 @@ func ArmoredToByte(in []byte) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
+// nolint
 var Signed = []byte(`This is a very nice little message,
 that I wan't you to sign.
 `)
 
+// nolint
 var Signature = []byte(`-----BEGIN PGP SIGNATURE-----
 
 iQIzBAABCAAdFiEEcFGl3JJdvXvot121G4wC00FZ0mwFAlsMBH0ACgkQG4wC00FZ
@@ -72,10 +75,13 @@ SLbN6OXI8JQuKfVpX+PIZBa0YJQJx5qPPEclCfj7n/EYqFtDBzY=
 =xTnD
 -----END PGP SIGNATURE-----`)
 
+// nolint
 var SignerFingerPrint = "7051a5dc925dbd7be8b75db51b8c02d34159d26c"
 
+// nolint
 var SignerKeyID = "1b8c02d34159d26c"
 
+// nolint
 var SignerPub = []byte(`
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -129,6 +135,7 @@ fqLQ4y4XB9tYrUNded1JkajhiGqSurn558F9TnRwQ3kzN94gTO+1odK5
 -----END PGP PUBLIC KEY BLOCK-----
 `)
 
+// nolint
 var SignerPriv = []byte(`
 -----BEGIN PGP PRIVATE KEY BLOCK-----
 
@@ -235,6 +242,7 @@ Q1153UmRqOGIapK6ufnnwX1OdHBDeTM33iBM77Wh0rk=
 =qEfX
 -----END PGP PRIVATE KEY BLOCK-----`)
 
+// nolint
 var AltSignature = []byte(`
 -----BEGIN PGP SIGNATURE-----
 
@@ -253,6 +261,7 @@ thRKVgCuzPJJtbb0f63Ix+aEGDBVBKyfu7NF/JCB2bBV8PJUydc=
 =CDjz
 -----END PGP SIGNATURE-----`)
 
+// nolint
 var AltSignerPub = []byte(`
 -----BEGIN PGP PUBLIC KEY BLOCK-----
 
@@ -306,6 +315,7 @@ mYmZQA==
 =fgmM
 -----END PGP PUBLIC KEY BLOCK-----`)
 
+// nolint
 var AltSignerPriv = []byte(`
 -----BEGIN PGP PRIVATE KEY BLOCK-----
 
@@ -412,10 +422,13 @@ HoWAi9aG5izqRrRHrscot1mf73v2v/o0EGRjJRiKIKd+gZgagC6ZiZlA
 =5kjn
 -----END PGP PRIVATE KEY BLOCK-----`)
 
+// nolint
 var GithubPublicKeyUser = "paulbes"
 
+// nolint
 var GithubPublicKeyID = "636D0FFA76510A75"
 
+// nolint
 var GithubPublicKey = `-----BEGIN PGP PUBLIC KEY BLOCK-----
 Comment: https://keybase.io/download
 Version: Keybase Go 1.0.47 (darwin)

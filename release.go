@@ -43,9 +43,9 @@ type Finaliser interface {
 func New(name string, options ...Option) Releaser {
 	// Add some sensible default if otherwise not provided
 	r := &releaser{
-		name:    name,
-		version: NewGitHistoryVersion(".", "master", 1),
-		Signer: NewSigner(pgp.DefaultConfig),
+		name:     name,
+		version:  NewGitHistoryVersion(".", "master", 1),
+		Signer:   NewSigner(pgp.DefaultConfig),
 		Verifier: NewVerifier(pgp.DefaultConfig),
 	}
 	for _, o := range options {

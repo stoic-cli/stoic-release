@@ -3,12 +3,13 @@ package pgp
 import (
 	"bytes"
 	"crypto"
+	"time"
+
 	"github.com/awnumar/memguard"
 	"github.com/pkg/errors"
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/armor"
 	"golang.org/x/crypto/openpgp/packet"
-	"time"
 )
 
 // DefaultBits is the default size used when
@@ -21,6 +22,7 @@ var DefaultCipher = packet.CipherAES256
 // DefaultHash sets the default hash algorithm
 var DefaultHash = crypto.SHA256
 
+// DefaultTime sets the default time function
 var DefaultTime = func() time.Time {
 	return time.Now()
 }

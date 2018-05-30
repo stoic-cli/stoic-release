@@ -2,10 +2,11 @@ package vault
 
 import (
 	"errors"
+	"unsafe"
+
 	"github.com/awnumar/memguard"
 	"golang.org/x/crypto/nacl/secretbox"
 	"golang.org/x/crypto/scrypt"
-	"unsafe"
 )
 
 // Based on the code from: https://leanpub.com/gocrypto/read
@@ -18,6 +19,7 @@ const (
 	iterations = 1048576
 )
 
+// nolint
 var (
 	ErrEncrypt = errors.New("encryption failed")
 	ErrDecrypt = errors.New("decryption failed")

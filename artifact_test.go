@@ -1,9 +1,10 @@
 package release
 
 import (
+	"io/ioutil"
 	"strings"
 	"testing"
-	"io/ioutil"
+
 	"github.com/stretchr/testify/assert"
 )
 
@@ -15,14 +16,14 @@ func TestNameNormalising(t *testing.T) {
 		expect   string
 	}{
 		{
-			name:     "binary artifact",
+			name: "binary artifact",
 			artifact: func() Artifact {
 				a, err := NewBinaryArtifact(ioutil.NopCloser(strings.NewReader("some content")), "MyProject", OperatingSystemTypeDarwin, ArchTypeamd64)
 				assert.Nil(t, err)
 				return a
 			}(),
 			version: "v1.0.0",
-			expect:   "myproject_v1.0.0-darwin.amd64.bin",
+			expect:  "myproject_v1.0.0-darwin.amd64.bin",
 		},
 		{
 			name: "other artifact",
@@ -32,7 +33,7 @@ func TestNameNormalising(t *testing.T) {
 				return a
 			}(),
 			version: "v1.2.0",
-			expect: "myproject_v1.2.0.relnotes",
+			expect:  "myproject_v1.2.0.relnotes",
 		},
 	}
 

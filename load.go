@@ -1,21 +1,26 @@
 package release
 
 import (
-	"github.com/stoic-cli/stoic-release/pgp"
-	"path/filepath"
-	"github.com/pkg/errors"
-	"path"
-	"fmt"
-	"os"
 	"bytes"
+	"fmt"
 	"io"
+	"os"
+	"path"
+	"path/filepath"
 	"regexp"
+
+	"github.com/pkg/errors"
+	"github.com/stoic-cli/stoic-release/pgp"
 )
 
+// Loader defines the operations required for
+// loading a created release
 type Loader interface {
 	Load() (signature []byte, manifester Manifester, artifacts []Artifact, err error)
 }
 
+// LoadFinaliser defines the operations required
+// loading and finalising deployment of a release
 type LoadFinaliser interface {
 	Loader
 	Finaliser
@@ -28,6 +33,7 @@ type loadFinaliser struct {
 	Deployer
 }
 
+// NewLoader creates a new loader
 func NewLoader(loader Loader, deployer Deployer, deployers ...Deployer) (LoadFinaliser, error) {
 	return &loadFinaliser{
 		Loader:   loader,
@@ -40,6 +46,8 @@ type fileSystemLoader struct {
 	directory string
 }
 
+// NewFileSystemLoader creates a loader that can read
+// a release from a filesystem
 func NewFileSystemLoader(directory string) Loader {
 	return &fileSystemLoader{
 		directory: directory,

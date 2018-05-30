@@ -2,9 +2,10 @@ package pgp_test
 
 import (
 	"testing"
-	"github.com/stretchr/testify/assert"
+
 	"github.com/stoic-cli/stoic-release/mock"
 	"github.com/stoic-cli/stoic-release/pgp"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestHappyPath(t *testing.T) {

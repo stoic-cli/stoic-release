@@ -1,13 +1,16 @@
 package mock
 
 import (
-	"github.com/stoic-cli/stoic-release"
 	"io/ioutil"
 	"strings"
+
+	"github.com/stoic-cli/stoic-release"
 )
 
+// nolint
 var ProjectName = "MyProject"
 
+// nolint
 func ValidDigests() map[release.DigestType]string {
 	return map[release.DigestType]string{
 		release.DigestTypeMD5:    "736db904ad222bf88ee6b8d103fceb8e",
@@ -17,6 +20,7 @@ func ValidDigests() map[release.DigestType]string {
 	}
 }
 
+// nolint
 func ValidArtifacts() []release.Artifact {
 	a, _ := release.NewBinaryArtifact(ioutil.NopCloser(strings.NewReader("this is some content")), ProjectName, release.OperatingSystemTypeDarwin, release.ArchTypeamd64)
 	a.SetDigests(ValidDigests())

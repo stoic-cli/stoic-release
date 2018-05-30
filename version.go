@@ -2,12 +2,14 @@ package release
 
 import (
 	"fmt"
+
 	"github.com/pkg/errors"
 	"gopkg.in/src-d/go-git.v4"
 	"gopkg.in/src-d/go-git.v4/plumbing"
 	"gopkg.in/src-d/go-git.v4/plumbing/object"
 )
 
+// Versioner pro
 type Versioner interface {
 	Version() (string, error)
 }

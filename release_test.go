@@ -3,13 +3,14 @@ package release_test
 import (
 	"bytes"
 	"fmt"
-	"github.com/stoic-cli/stoic-release"
-	"github.com/stoic-cli/stoic-release/mock"
-	"github.com/stretchr/testify/assert"
 	"io"
 	"io/ioutil"
 	"strings"
 	"testing"
+
+	"github.com/stoic-cli/stoic-release"
+	"github.com/stoic-cli/stoic-release/mock"
+	"github.com/stretchr/testify/assert"
 )
 
 func TestNew(t *testing.T) {

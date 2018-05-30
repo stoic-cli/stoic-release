@@ -2,10 +2,11 @@ package release
 
 import (
 	"fmt"
-	"github.com/stretchr/testify/assert"
 	"io"
 	"strings"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestDigest(t *testing.T) {
@@ -31,10 +32,10 @@ func TestDigest(t *testing.T) {
 			expectErr: true,
 		},
 		{
-			name:      "Empty content",
-			digester:  NewDigester(DigestTypeMD5),
-			content:   strings.NewReader(""),
-			expect:    map[DigestType]string{
+			name:     "Empty content",
+			digester: NewDigester(DigestTypeMD5),
+			content:  strings.NewReader(""),
+			expect: map[DigestType]string{
 				DigestTypeMD5: "d41d8cd98f00b204e9800998ecf8427e",
 			},
 		},

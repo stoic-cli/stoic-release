@@ -1,9 +1,10 @@
 package vault
 
 import (
-	"github.com/stretchr/testify/assert"
 	"testing"
+
 	"github.com/awnumar/memguard"
+	"github.com/stretchr/testify/assert"
 )
 
 func LockedBuffer(t *testing.T, buf string) *memguard.LockedBuffer {

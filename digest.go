@@ -7,9 +7,10 @@ import (
 	"crypto/sha512"
 	"encoding/hex"
 	"fmt"
-	"github.com/pkg/errors"
 	"hash"
 	"io"
+
+	"github.com/pkg/errors"
 )
 
 // Digester defines the functions related to creating
@@ -21,6 +22,7 @@ type Digester interface {
 // DigestType enumerates the supported digesters
 type DigestType string
 
+// nolint
 const (
 	DigestTypeMD5    DigestType = "md5"
 	DigestTypeSHA1   DigestType = "sha1"

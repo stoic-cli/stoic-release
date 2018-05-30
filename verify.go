@@ -1,11 +1,12 @@
 package release
 
 import (
+	"fmt"
+	"io"
+
 	"github.com/pkg/errors"
 	"github.com/stoic-cli/stoic-release/pgp"
 	"golang.org/x/crypto/openpgp/packet"
-	"io"
-	"fmt"
 )
 
 // Verifier provides the interface required for verifying
@@ -31,6 +32,7 @@ type verifier struct {
 	config *packet.Config
 }
 
+// VerifySignature using the provided input
 func (v *verifier) VerifySignature(signee Signee, signed []byte, signature []byte) ([]string, error) {
 	signeeKey, err := signee.PublicKey()
 	if err != nil {
@@ -47,9 +49,11 @@ func (v *verifier) VerifySignature(signee Signee, signed []byte, signature []byt
 }
 
 var (
+	// ErrNoDigests indicates that no digests were provided
 	ErrNoDigests = errors.New("no digests provided")
 )
 
+// VerifyDigests using the provided input
 func (v *verifier) VerifyDigests(digests map[DigestType]string, reader io.Reader) error {
 	if len(digests) == 0 {
 		return ErrNoDigests

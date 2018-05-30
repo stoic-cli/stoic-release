@@ -1,16 +1,17 @@
 package release
 
 import (
-	"github.com/pkg/errors"
-	"path/filepath"
-	"os"
-	"path"
-	"io"
 	"bytes"
 	"fmt"
+	"io"
+	"os"
+	"path"
+	"path/filepath"
+
+	"github.com/pkg/errors"
 )
 
-// Save provides an interface for storing a release
+// Saver provides an interface for storing a release
 type Saver interface {
 	Save(signature []byte, manifest Manifester, artifacts []Artifact) error
 }
@@ -19,6 +20,8 @@ type saver struct {
 	savers []Saver
 }
 
+// NewSavers returns a composition for multiple
+// savers
 func NewSavers(savers []Saver) Saver {
 	return &saver{
 		savers: savers,
@@ -48,6 +51,7 @@ func NewFileSystemSaver(directory string) Saver {
 	}
 }
 
+// Save the release to the file system
 func (fs *fileSystemSaver) Save(signature []byte, manifest Manifester, artifacts []Artifact) error {
 	absPath, err := filepath.Abs(fs.directory)
 	if err != nil {

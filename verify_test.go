@@ -2,13 +2,14 @@ package release_test
 
 import (
 	"fmt"
+	"io"
+	"strings"
+	"testing"
+
 	"github.com/stoic-cli/stoic-release"
 	"github.com/stoic-cli/stoic-release/mock"
 	"github.com/stoic-cli/stoic-release/pgp"
 	"github.com/stretchr/testify/assert"
-	"io"
-	"strings"
-	"testing"
 )
 
 func TestVerifySignature(t *testing.T) {
@@ -79,14 +80,14 @@ func TestVerifyDigests(t *testing.T) {
 			digests: map[release.DigestType]string{
 				release.DigestTypeMD5: "736db904ad222b",
 			},
-			artifact: strings.NewReader("this is some content"),
-			expect:   "verification failed, hash mismatch, got: 736db904ad222bf88ee6b8d103fceb8e, expected: 736db904ad222b",
+			artifact:  strings.NewReader("this is some content"),
+			expect:    "verification failed, hash mismatch, got: 736db904ad222bf88ee6b8d103fceb8e, expected: 736db904ad222b",
 			expectErr: true,
 		},
 		{
-			name:    "No digests",
-			digests: nil,
-			expect:  release.ErrNoDigests.Error(),
+			name:      "No digests",
+			digests:   nil,
+			expect:    release.ErrNoDigests.Error(),
 			expectErr: true,
 		},
 		{
@@ -94,8 +95,8 @@ func TestVerifyDigests(t *testing.T) {
 			digests: map[release.DigestType]string{
 				release.DigestTypeSHA1: "5ec1a3cb71c75c52cf23934b137985bd2499bd85",
 			},
-			artifact: nil,
-			expect:   "failed to verify digests: reader is nil",
+			artifact:  nil,
+			expect:    "failed to verify digests: reader is nil",
 			expectErr: true,
 		},
 	}
