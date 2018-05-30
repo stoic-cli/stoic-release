@@ -31,6 +31,7 @@ func TestNew(t *testing.T) {
 	m, err := manifest.Serialise()
 	assert.Nil(t, err)
 	_, err = io.Copy(&buf, m)
+	assert.Nil(t, err)
 
 	// Sign
 	signatory, err := mock.ValidSignatory()
