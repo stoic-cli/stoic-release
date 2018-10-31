@@ -232,7 +232,7 @@ $(RICHGO): | go
 	go get -u github.com/kyoh86/richgo
 
 $(MAKEDOC): | go
-	go get -u gopkg.schibsted.io/spt-DevRel/makedoc
+	go get -u github.com/paulbes/makedoc
 
 ## Run all reasonable targets
 ##
@@ -910,7 +910,7 @@ endif
 
 SERVICE_PUBLISH_ENABLE ?= false
 SERVICE_PUBLISH_TAG    ?=
-SERVICE_PUBLISH_URL    ?= containers.schibsted.io
+SERVICE_PUBLISH_URL    ?= 
 SERVICE_PUBLISH_USER   ?= $(ARTIFACTORY_USER)
 SERVICE_PUBLISH_PWD    ?= $(ARTIFACTORY_PWD)
 
@@ -1040,7 +1040,7 @@ inspect: $(DIST_DIR)/*.$(PACKAGE_TYPE)
 .PHONY: inspect
 
 PUBLISH_ENABLE             ?= false
-ARTIFACTORY_URL            ?= https://artifacts.schibsted.io/artifactory
+ARTIFACTORY_URL            ?=
 ARTIFACTORY_REMOTE_PROJECT ?=
 ARTIFACTORY_REMOTE_BASE    ?=
 ARTIFACTORY_USER           ?=
@@ -1184,11 +1184,6 @@ help-verbose: $(MAKEDOC)
 help-%: $(MAKEDOC)
 	@$(MAKEDOC) -pretty -verbose -target $(*) $(MAKEFILE_LIST)
 .PHONY: help-%
-
-## For help with debugging visit: https://github.schibsted.io/spt-DevRel/sch-make
-help-debug:
-	@echo "For help with debugging visit: https://github.schibsted.io/spt-DevRel/sch-make"
-.PHONY: help-debug
 
 ## Dump the list of make files that are used in this project
 ##
